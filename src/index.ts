@@ -1,21 +1,32 @@
-import express from 'express'; // yarn add express
-import { createHandler } from 'graphql-http/lib/use/express';
-import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
+import { ApolloServer } from 'apollo-server'
+import { buildSchema } from 'graphql'
 
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-      hello: {
-        type: GraphQLString,
-        resolve: () => 'world',
-      },
+const app = async () => {
+  const schema = buildSchema(`
+    type Author {
+      id: ID!
+      name: String
+      gender: String
+      createdAt: String
+      updatedAt: String
+    }
+
+    type Query {
+      authors: [Author],
+      author(id: ID!): Author
+    }
+  `)
+
+  const resolvers = {
+    Query: {
+      authors: () => "{}",
+      author: (_, { id }) => "{}"
     },
-  }),
-});
+  }
 
-const app = express();
-app.all('/graphql', createHandler({ schema }));
+  new ApolloServer({ schema, resolvers }).listen({ port: 4000 }, () =>
+    console.log('🚀 Server ready at: <http://localhost:4000>')
+  )
+}
 
-app.listen({ port: 4000 });
-console.log('Listening to port 4000');
+app()
