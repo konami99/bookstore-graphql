@@ -8,6 +8,27 @@ import { getAuthor, listAuthors } from './queries/author.queries'
       id: ID!
       name: String!
       gender: String!
+      pseudonym: Pseudonym!
+      books: [Book]
+      bankAccounts: [BankAccount]
+    }
+
+    type BankAccount {
+      id: ID!
+      accountNumber: Int!
+      author: Author!
+    }
+
+    type Pseudonym {
+      id: ID!
+      name: String!
+      author: Author!
+    }
+
+    type Book {
+      id: ID!
+      title: String!
+      authors: [Author]
     }
 
     type Query {
