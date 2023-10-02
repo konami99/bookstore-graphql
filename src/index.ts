@@ -1,6 +1,9 @@
 import { ApolloServer, gql } from 'apollo-server'
 import { buildSchema } from 'graphql'
 import { getAuthor, listAuthors } from './queries/author.queries'
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 const typeDefs = gql`
   type Author {
