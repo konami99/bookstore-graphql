@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+//import { AuthorInput } from '../index'
 
 const prisma = new PrismaClient()
 
@@ -11,7 +12,11 @@ export async function getAuthor(id: string): Promise<any> {
       include: {
         pseudonym: true,
         bankAccounts: true,
-        books: true
+        books: {
+          include: {
+            book: true
+          }
+        }
       }
     })
   } catch (err) {
@@ -25,7 +30,11 @@ export async function listAuthors(): Promise<any> {
       include: {
         pseudonym: true,
         bankAccounts: true,
-        books: true
+        books: {
+          include: {
+            book: true
+          }
+        }
       }
     });
   } catch (err) {

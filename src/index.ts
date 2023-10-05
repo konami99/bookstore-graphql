@@ -8,8 +8,13 @@ const typeDefs = gql`
     name: String!
     gender: String!
     pseudonym: Pseudonym!
-    books: [Book]
+    books: [BookOnAuthor]
     bankAccounts: [BankAccount]
+  }
+
+  type BookOnAuthor {
+    book: Book
+    author: Author
   }
 
   type BankAccount {
@@ -27,7 +32,7 @@ const typeDefs = gql`
   type Book {
     id: ID!
     title: String!
-    authors: [Author]
+    authors: [BookOnAuthor]
   }
 
   input AuthorInput {
@@ -68,7 +73,7 @@ type PseudonymInput = {
   name: string,
 }
 
-type AuthorInput = {
+export type AuthorInput = {
   name: string,
   gender: string,
   books?: BookInput[],
