@@ -1,3 +1,6 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 export function getAuthor(id: any): any {
   try {
@@ -14,12 +17,13 @@ export function getAuthor(id: any): any {
 
 export function listAuthors(): any {
   try {
-    const resp = [{
-      id: 1,
-      name: 'Rex',
-      gender: 'M'
-    }]
-    return resp
+    return prisma.author.findMany({
+      include: {
+        pseudonym: true,
+        bankAccounts: true,
+        books: true
+      }
+  });
   } catch (err) {
     return err
   }
