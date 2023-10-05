@@ -15,6 +15,26 @@ const typeDefs = gql`
     bankAccounts: [BankAccount]
   }
 
+  input AuthorInput {
+    name: String!
+    gender: String!
+    pseudonym: PseudonymInput
+    books: [BookInput]
+    bankAccounts: [BankAccountInput]
+  }
+
+  input PseudonymInput {
+    name: String!
+  }
+
+  input BookInput {
+    title: String!
+  }
+
+  input BankAccountInput {
+    accountNumber: Int!
+  }
+
   type BankAccount {
     id: ID!
     accountNumber: Int!
@@ -38,6 +58,26 @@ const typeDefs = gql`
     author(id: ID!): Author
   }
 `
+
+type BookInput = {
+  title: string,
+}
+
+type BankAccountInput = {
+  accountNumber: number,
+}
+
+type PseudonymInput = {
+  name: string,
+}
+
+type AuthorInput = {
+  name: string,
+  gender: string,
+  books?: BookInput[],
+  bankAccounts?: BankAccountInput[],
+  pseudonym?: PseudonymInput,
+}
 
 const resolvers = {
   Query: {
