@@ -1,6 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server'
 import { buildSchema } from 'graphql'
-import { getAuthor, listAuthors } from './queries/author.queries'
+import { getAuthor, listAuthors, addAuthor } from './queries/author.queries'
 
 const typeDefs = gql`
   type Author {
@@ -59,6 +59,10 @@ const typeDefs = gql`
     authors: [Author],
     author(id: ID!): Author
   }
+
+  type Mutation {
+    addAuthor(authorToAdd: AuthorInput!): Author
+  }
 `
 
 type BookInput = {
@@ -81,11 +85,22 @@ export type AuthorInput = {
   pseudonym?: PseudonymInput,
 }
 
+export type Author = {
+  id: number,
+  name: string,
+  gender: string,
+  createdAt: Date,
+  updatedAt: Date,
+}
+
 const resolvers = {
   Query: {
     authors: () => listAuthors(),
     author: (_, { id }) => getAuthor(id)
   },
+  Mutation: {
+    addAuthor: (_, { authorToAdd }) => addAuthor(authorToAdd),
+  }
 }
 
 // prisma generate
