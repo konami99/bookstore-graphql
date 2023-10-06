@@ -52,7 +52,7 @@ const typeDefs = gql`
   }
 
   input BankAccountInput {
-    accountNumber: Int!
+    accountNumber: String!
   }
 
   type Query {
@@ -70,7 +70,7 @@ type BookInput = {
 }
 
 type BankAccountInput = {
-  accountNumber: number,
+  accountNumber: string,
 }
 
 type PseudonymInput = {

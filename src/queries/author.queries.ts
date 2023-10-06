@@ -10,14 +10,43 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
       gender: authorToAdd.gender,
       pseudonym: { create: { name: authorToAdd.pseudonym.name } },
     },
+  })
+
+  await prisma.bankAccount.createMany({
+    data: authorToAdd.bankAccounts.map((ba) => ({
+      ...ba,
+      authorId: author.id,
+    })),
+  });
+
+  authorToAdd.books.map(async (b) => {
+    const book = await prisma.book.create({
+      data: {
+        ...b
+      }
+    })
+    await prisma.booksOnAuthors.create({
+      data: {
+        bookId: book.id,
+        authorId: author.id,
+      }
+    })
+  })
+
+  return prisma.author.findFirst({
+    where: {
+      id: author.id,
+    },
     include: {
       pseudonym: true,
       bankAccounts: true,
-      books: true,
+      books: {
+        include: {
+          book: true
+        }
+      },
     }
-  })
-
-  return author;
+  });
 }
 
 export async function getAuthor(id: string): Promise<any> {
