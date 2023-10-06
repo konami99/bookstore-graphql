@@ -88,6 +88,9 @@ const resolvers = {
   },
 }
 
+// prisma generate
+// npm run dev
+
 new ApolloServer({ typeDefs, resolvers }).listen({ port: 4000 }, () =>
   console.log('🚀 Server ready at: <http://localhost:4000>')
 )
