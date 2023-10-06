@@ -3,7 +3,7 @@ import { AuthorInput, Author } from '../index'
 
 const prisma = new PrismaClient()
 
-export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
+export async function addAuthor(authorToAdd: AuthorInput): Promise<any> {
   const author: Author = await prisma.author.create({
     data: {
       name: authorToAdd.name,
@@ -19,7 +19,7 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
     })),
   });
 
-  authorToAdd.books.map(async (b) => {
+  await Promise.all(authorToAdd.books.map(async(b) => {
     const book = await prisma.book.create({
       data: {
         ...b
@@ -31,7 +31,7 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
         authorId: author.id,
       }
     })
-  })
+  }))
 
   return prisma.author.findFirst({
     where: {
