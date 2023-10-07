@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server'
 import { buildSchema } from 'graphql'
-import { getAuthor, listAuthors, addAuthor } from './queries/author.queries'
-
+import { getAuthor, listAuthors } from './queries/authors.queries'
+import { addAuthor } from './mutations/authors.mutations'
 const typeDefs = gql`
   type Author {
     id: ID!
