@@ -4,7 +4,7 @@ import { Field, ObjectType, InputType, ID } from "type-graphql"
 @ObjectType()
 export class Author {
   @Field(type => ID)
-  id!: string
+  id!: number
 
   @Field()
   name!: string
@@ -12,96 +12,117 @@ export class Author {
   @Field()
   gender!: string
 
-  @Field(type => Pseudonym)
-  pseudonym!: Pseudonym
-
-  @Field(type => [BookOnAuthor])
-  books: BookOnAuthor[]
+  @Field(type => [BooksOnAuthors])
+  books: [BooksOnAuthors]
 
   @Field(type => [BankAccount])
-  bankAccounts: BankAccount[]
+  bankAccounts: [BankAccount]
+
+  @Field(type => Date)
+  createdAt: Date
+
+  @Field(type => Date)
+  updatedAt: Date
 }
 
 @ObjectType()
 export class BankAccount {
   @Field(type => ID)
-  id!: string
+  id!: number
 
   @Field()
   accountNumber!: string
 
   @Field(type => Author)
   author!: Author
+
+  @Field(type => Date)
+  createdAt: Date
+
+  @Field(type => Date)
+  updatedAt: Date
 }
 
 @ObjectType()
 export class Pseudonym {
   @Field(type => ID)
-  id!: string
+  id!: number
 
   @Field()
   name!: string
 
   @Field(type => Author)
   author!: Author
+
+  @Field(type => Date)
+  createdAt: Date
+
+  @Field(type => Date)
+  updatedAt: Date
 }
 
 @ObjectType()
 export class Book {
   @Field(type => ID)
-  id!: string
+  id!: number
 
   @Field()
   title!: string
 
-  @Field(type => [BookOnAuthor])
-  authors!: BookOnAuthor[]
+  @Field(type => [BooksOnAuthors])
+  authors!: [BooksOnAuthors]
+
+  @Field(type => Date)
+  createdAt: Date
+
+  @Field(type => Date)
+  updatedAt: Date
 }
 
 @ObjectType()
-export class BookOnAuthor {
-  @Field(type => ID)
-  id!: string
-
+export class BooksOnAuthors {
   @Field(type => Book)
   book!: Book
 
   @Field(type => Author)
   author!: Author
+
+  @Field((type) => Date)
+  createdAt: Date
 }
 
 @InputType()
-class AuthorInput {
+export class AuthorInput {
   @Field()
   name!: string;
 
   @Field()
   gender!: string;
 
-  @Field()
+  @Field(type => [PseudonymInput])
   pseudonym!: PseudonymInput
 
-  @Field()
-  books: BookInput[]
+  @Field(type => [BookInput], { nullable: true })
+  books: [BookInput]
 
-  @Field()
-  bankAccounts: BankAccountInput[]
+  @Field(type => BankAccountInput, { nullable: true })
+  bankAccounts: [BankAccountInput]
 }
 
 @InputType()
-class PseudonymInput {
+export class PseudonymInput {
   @Field()
   name!: string;
 }
 
 @InputType()
-class BookInput {
+export class BookInput {
   @Field()
   title!: string;
 }
 
 @InputType()
-class BankAccountInput {
+export class BankAccountInput {
   @Field()
   accountNumber!: string;
 }

@@ -1,10 +1,10 @@
 import { PrismaClient } from '@prisma/client';
-import { AuthorInput, Author } from '../index'
+import { AuthorInput, Author } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
-export async function addAuthor(authorToAdd: AuthorInput): Promise<any> {
-  const author: Author = await prisma.author.create({
+export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
+  const author = await prisma.author.create({
     data: {
       name: authorToAdd.name,
       gender: authorToAdd.gender,
@@ -33,18 +33,14 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<any> {
     })
   }))
 
-  return prisma.author.findFirst({
+  return prisma.author.findUnique({
     where: {
       id: author.id,
     },
     include: {
       pseudonym: true,
       bankAccounts: true,
-      books: {
-        include: {
-          book: true
-        }
-      },
+      books: true,
     }
   });
 }
