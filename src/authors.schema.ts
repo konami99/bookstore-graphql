@@ -12,6 +12,9 @@ export class Author {
   @Field()
   gender!: string
 
+  @Field(type => Pseudonym)
+  pseudonym: Pseudonym
+
   @Field(type => [BooksOnAuthors])
   books: [BooksOnAuthors]
 
@@ -51,9 +54,6 @@ export class Pseudonym {
   @Field()
   name!: string
 
-  @Field(type => Author)
-  author!: Author
-
   @Field(type => Date)
   createdAt: Date
 
@@ -87,7 +87,7 @@ export class BooksOnAuthors {
   @Field(type => Author)
   author!: Author
 
-  @Field((type) => Date)
+  @Field(type => Date)
   createdAt: Date
 }
 

@@ -11,23 +11,23 @@ datasource db {
 }
 
 model Author {
-  id           Int              @id @default(autoincrement())
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
+  id           Int           @id @default(autoincrement())
   name         String
-  gender       String
+  sex       String
   books        BooksOnAuthors[]
   bankAccounts BankAccount[]
-  Pseudonym    Pseudonym?
+  pseudonym    Pseudonym     @relation(fields: [pseudonymId], references: [id])
+  pseudonymId  Int @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Book {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   title   String
   authors BooksOnAuthors[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model BooksOnAuthors {
@@ -42,21 +42,17 @@ model BooksOnAuthors {
 
 model BankAccount {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   accountNumber String
-
   authorId Int
   author   Author @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Pseudonym {
   id        Int      @id @default(autoincrement())
+  name   String
+  author Author?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  name     String
-  authorId Int    @unique
-  author   Author @relation(fields: [authorId], references: [id])
 }

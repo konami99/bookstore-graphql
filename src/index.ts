@@ -65,34 +65,6 @@ const typeDefs = gql`
   }
 `
 
-type BookInput = {
-  title: string,
-}
-
-type BankAccountInput = {
-  accountNumber: string,
-}
-
-type PseudonymInput = {
-  name: string,
-}
-
-export type AuthorInput = {
-  name: string,
-  gender: string,
-  books?: BookInput[],
-  bankAccounts?: BankAccountInput[],
-  pseudonym?: PseudonymInput,
-}
-
-export type Author = {
-  id: number,
-  name: string,
-  gender: string,
-  createdAt: Date,
-  updatedAt: Date,
-}
-
 const resolvers = {
   Query: {
     authors: () => listAuthors(),

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { PrismaClient } from '@prisma/client';
 import { AuthorInput, Author } from '../authors.schema'
 
@@ -33,14 +34,18 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
     })
   }))
 
-  return prisma.author.findUnique({
+  return prisma.author.findFirst({
     where: {
       id: author.id,
     },
     include: {
       pseudonym: true,
       bankAccounts: true,
-      books: true,
+      books: {
+        select: {
+          book: true,
+        }
+      }
     }
-  });
+  })
 }
