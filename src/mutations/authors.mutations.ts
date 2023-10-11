@@ -9,7 +9,7 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
     data: {
       name: authorToAdd.name,
       gender: authorToAdd.gender,
-      pseudonym: { create: { name: authorToAdd.pseudonym.name } },
+      pseudonym: authorToAdd.pseudonym,
     },
   })
 
@@ -39,7 +39,6 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
       id: author.id,
     },
     include: {
-      pseudonym: true,
       bankAccounts: true,
       books: {
         select: {

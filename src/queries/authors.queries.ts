@@ -10,7 +10,6 @@ export async function getAuthor(id: string): Promise<any> {
         id: parseInt(id)
       },
       include: {
-        pseudonym: true,
         bankAccounts: true,
         books: {
           include: {
@@ -28,7 +27,6 @@ export async function listAuthors(): Promise<any> {
   try {
     return prisma.author.findMany({
       include: {
-        pseudonym: true,
         bankAccounts: true,
         books: {
           include: {

@@ -12,8 +12,8 @@ export class Author {
   @Field()
   gender!: string
 
-  @Field(type => Pseudonym)
-  pseudonym: Pseudonym
+  @Field()
+  pseudonym: string
 
   @Field(type => [BooksOnAuthors])
   books: [BooksOnAuthors]
@@ -38,21 +38,6 @@ export class BankAccount {
 
   @Field(type => Author)
   author!: Author
-
-  @Field(type => Date)
-  createdAt: Date
-
-  @Field(type => Date)
-  updatedAt: Date
-}
-
-@ObjectType()
-export class Pseudonym {
-  @Field(type => ID)
-  id!: number
-
-  @Field()
-  name!: string
 
   @Field(type => Date)
   createdAt: Date
@@ -99,20 +84,14 @@ export class AuthorInput {
   @Field()
   gender!: string;
 
-  @Field(type => [PseudonymInput])
-  pseudonym!: PseudonymInput
+  @Field()
+  pseudonym!: string;
 
   @Field(type => [BookInput], { nullable: true })
   books: [BookInput]
 
   @Field(type => BankAccountInput, { nullable: true })
   bankAccounts: [BankAccountInput]
-}
-
-@InputType()
-export class PseudonymInput {
-  @Field()
-  name!: string;
 }
 
 @InputType()
