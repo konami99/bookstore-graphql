@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { MaxLength, Length, ValidateNested } from "class-validator";
 import { Field, ObjectType, InputType, ID } from "type-graphql"
 
 @ObjectType()
@@ -79,6 +80,7 @@ export class BooksOnAuthors {
 @InputType()
 export class AuthorInput {
   @Field()
+  @MaxLength(30)
   name!: string;
 
   @Field()
@@ -87,21 +89,25 @@ export class AuthorInput {
   @Field()
   pseudonym!: string;
 
-  @Field(type => [BookInput], { nullable: true })
+  @Field(type => [BookInput])
+  @ValidateNested()
   books: [BookInput]
 
-  @Field(type => BankAccountInput, { nullable: true })
+  @Field(type => [BankAccountInput])
+  @ValidateNested()
   bankAccounts: [BankAccountInput]
 }
 
 @InputType()
 export class BookInput {
   @Field()
+  @MaxLength(3)
   title!: string;
 }
 
 @InputType()
 export class BankAccountInput {
   @Field()
+  @MaxLength(1)
   accountNumber!: string;
 }

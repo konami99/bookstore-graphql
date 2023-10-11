@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import { AuthorInput, Author } from '../index'
+import { AuthorInput, Author } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
-export async function getAuthor(id: string): Promise<any> {
+export async function getAuthor(id: number): Promise<any> {
   try {
     return prisma.author.findFirst({
       where: {
-        id: parseInt(id)
+        id
       },
       include: {
         bankAccounts: true,
