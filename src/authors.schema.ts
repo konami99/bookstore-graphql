@@ -84,9 +84,11 @@ export class AuthorInput {
   name!: string;
 
   @Field()
+  @MaxLength(10)
   gender!: string;
 
   @Field()
+  @MaxLength(30)
   pseudonym!: string;
 
   @Field(type => [BookInput])
@@ -101,13 +103,13 @@ export class AuthorInput {
 @InputType()
 export class BookInput {
   @Field()
-  @MaxLength(3)
+  @MaxLength(30)
   title!: string;
 }
 
 @InputType()
 export class BankAccountInput {
   @Field()
-  @MaxLength(1)
+  @MaxLength(30)
   accountNumber!: string;
 }
