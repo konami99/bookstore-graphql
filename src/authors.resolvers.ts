@@ -14,12 +14,20 @@ export class AuthorResolver {
   }
 
   @Query(returns => Author)
-  async getAuthor(@Ctx() { author }: MyContext, @Arg("id") id: string, @Arg("name") username: string): Promise<Author> {
-    if (author == null) {
-      return null
+  async getAuthor(@Ctx() { authAuthor }: MyContext, @Arg("id") id: string, @Arg("name") username: string): Promise<Author> {
+    if (authAuthor == null) {
+      throw new Error('Authentication failed')
     }
     
-    return getAuthor(id, username)
+    const author = await getAuthor(id, username)
+
+    console.log(author)
+
+    if (author == null) {
+      throw new Error('User not found')
+    }
+
+    return author
   }
 
   @Query(returns => [Author])

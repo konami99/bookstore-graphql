@@ -24,8 +24,8 @@ async function main() {
         const [username, password] = credentials.split(':');
         author = await getAuthor("null", username)
       }
-      console.log(author)
-      return { author }
+      //console.log(author)
+      return { authAuthor: author }
     }
   }).listen({ port: 4000 }, () =>
     console.log('🚀 Server ready at: <http://localhost:4000>')
