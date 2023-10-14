@@ -14,6 +14,12 @@ export class Author {
   gender!: string
 
   @Field()
+  username!: string
+
+  @Field()
+  password!: string
+
+  @Field()
   pseudonym: string
 
   @Field(type => [BooksOnAuthors])

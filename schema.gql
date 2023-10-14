@@ -10,8 +10,10 @@ type Author {
   gender: String!
   id: ID!
   name: String!
+  password: String!
   pseudonym: String!
   updatedAt: DateTime!
+  username: String!
 }
 
 input AuthorInput {
@@ -62,6 +64,6 @@ type Mutation {
 }
 
 type Query {
-  getAuthor(id: String!): Author!
+  getAuthor(id: String!, name: String!): Author!
   listAuthors: [Author!]!
 }

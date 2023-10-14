@@ -3,12 +3,20 @@ import { AuthorInput, Author } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
-export async function getAuthor(id: number): Promise<any> {
+export async function getAuthor(id: string, username: string): Promise<any> {
   try {
+    const where: { id?: number; username?: string } = {};
+
+    if (id !== "null") {
+      where.id = parseInt(id);
+    }
+
+    if (username !== "null") {
+      where.username = username;
+    }
+
     return prisma.author.findFirst({
-      where: {
-        id
-      },
+      where: where,
       include: {
         bankAccounts: true,
         books: {
