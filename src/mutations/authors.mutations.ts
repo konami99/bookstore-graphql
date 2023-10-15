@@ -4,12 +4,14 @@ import { AuthorInput, Author } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
-export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
+export async function addAuthor(authorToAdd: AuthorInput): Promise<any> {
   const author = await prisma.author.create({
     data: {
       name: authorToAdd.name,
       gender: authorToAdd.gender,
       pseudonym: authorToAdd.pseudonym,
+      username: authorToAdd.username,
+      password: authorToAdd.password,
     },
   })
 

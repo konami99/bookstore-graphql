@@ -95,6 +95,14 @@ export class AuthorInput {
 
   @Field()
   @MaxLength(30)
+  username!: string;
+
+  @Field()
+  @MaxLength(30)
+  password!: string;
+
+  @Field()
+  @MaxLength(30)
   pseudonym!: string;
 
   @Field(type => [BookInput])
