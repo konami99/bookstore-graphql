@@ -1,0 +1,23 @@
+version: '3'
+services:
+  apollo-server:
+    build:
+      context: . # The context is the directory where your Dockerfile is located
+      dockerfile: Dockerfile # Path to your Dockerfile
+    ports:
+      - "4000:4000" # Map the container port 4000 to the host port 4000
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: "postgresql://user:password@database:5432/bookstore_graphql_dev?schema=public"
+    links:
+      - database
+
+  database:
+    image: postgres:15 # Use a specific version of the PostgreSQL image
+    ports:
+      - "5433:5432" # Map the container port 5432 to the host port 5432
+    environment:
+      POSTGRES_DB: bookstore_dev # Change to your desired database name
+      POSTGRES_USER: user # Change to your desired database user
+      POSTGRES_PASSWORD: password # Change to your desired database password

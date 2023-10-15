@@ -5,5 +5,8 @@
     "module": "commonjs",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-  }
+    "esModuleInterop": true,
+    "outDir": "./dist",
+  },
+  "include": ["src/**/*.ts"]
 }
