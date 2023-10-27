@@ -1,6 +1,7 @@
 import "reflect-metadata";
+import { Author } from '@prisma/client';
 import { Arg, Resolver, Mutation, Query, Ctx } from "type-graphql"
-import { AuthorInput, Author } from "./authors.schema";
+import { AuthorInput, Author as AuthorType } from "./authors.schema";
 import { addAuthor } from "./mutations/authors.mutations";
 import { getAuthor, listAuthors } from "./queries/authors.queries";
 import { MyContext } from './context'
@@ -8,12 +9,12 @@ import { MyContext } from './context'
 
 @Resolver()
 export class AuthorResolver {
-  @Mutation(returns => Author)
+  @Mutation(returns => AuthorType)
   async addAuthor(@Arg("data") newAuthorData: AuthorInput): Promise<Author> {
     return addAuthor(newAuthorData)
   }
 
-  @Query(returns => Author)
+  @Query(returns => AuthorType)
   async getAuthor(@Ctx() { authAuthor }: MyContext, @Arg("id") id: string, @Arg("name") username: string): Promise<Author> {
     if (authAuthor == null) {
       throw new Error('Authentication failed')
@@ -30,7 +31,7 @@ export class AuthorResolver {
     return author
   }
 
-  @Query(returns => [Author])
+  @Query(returns => [AuthorType])
   async listAuthors(): Promise<Author[]> {
     return listAuthors()
   }
