@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
-import { AuthorInput, Author } from '../authors.schema'
+import { PrismaClient, Author } from '@prisma/client';
+import { AuthorInput } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
-export async function getAuthor(id: string, username: string): Promise<any> {
+export async function getAuthor(id: string, username: string): Promise<Author> {
   try {
     const where: { id?: number; username?: string } = {};
 
@@ -31,7 +31,7 @@ export async function getAuthor(id: string, username: string): Promise<any> {
   }
 }
 
-export async function listAuthors(): Promise<any> {
+export async function listAuthors(): Promise<Author[]> {
   try {
     return prisma.author.findMany({
       include: {

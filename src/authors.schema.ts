@@ -23,7 +23,7 @@ export class Author {
   pseudonym: string
 
   @Field(type => [BooksOnAuthors])
-  books: [BooksOnAuthors]
+  books: BooksOnAuthors[]
 
   @Field(type => [BankAccount])
   bankAccounts: [BankAccount]
@@ -62,7 +62,7 @@ export class Book {
   title!: string
 
   @Field(type => [BooksOnAuthors])
-  authors!: [BooksOnAuthors]
+  authors!: BooksOnAuthors[]
 
   @Field(type => Date)
   createdAt: Date
