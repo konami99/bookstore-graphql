@@ -4,8 +4,8 @@
 # -----------------------------------------------
 
 type Author {
-  bankAccounts: [BankAccount!]!
-  books: [BooksOnAuthors!]!
+  bankAccounts: [BankAccount!]
+  books: [BooksOnAuthors!]
   createdAt: DateTime!
   gender: String!
   id: ID!
@@ -17,8 +17,7 @@ type Author {
 }
 
 input AuthorInput {
-  bankAccounts: [BankAccountInput!]!
-  books: [BookInput!]!
+  bankAccounts: [BankAccountInput!]
   gender: String!
   name: String!
   password: String!
@@ -28,7 +27,7 @@ input AuthorInput {
 
 type BankAccount {
   accountNumber: String!
-  author: Author!
+  author: Author
   createdAt: DateTime!
   id: ID!
   updatedAt: DateTime!
@@ -39,20 +38,16 @@ input BankAccountInput {
 }
 
 type Book {
-  authors: [BooksOnAuthors!]!
+  authors: [BooksOnAuthors!]
   createdAt: DateTime!
   id: ID!
   title: String!
   updatedAt: DateTime!
 }
 
-input BookInput {
-  title: String!
-}
-
 type BooksOnAuthors {
-  author: Author!
-  book: Book!
+  author: Author
+  book: Book
   createdAt: DateTime!
 }
 

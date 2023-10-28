@@ -1,5 +1,6 @@
-import { PrismaClient, Author } from '@prisma/client';
-import { AuthorInput } from '../authors.schema'
+import "reflect-metadata";
+import { PrismaClient  } from '@prisma/client';
+import { AuthorInput, Author } from '../authors.schema'
 
 const prisma = new PrismaClient()
 
@@ -21,7 +22,7 @@ export async function getAuthor(id: string, username: string): Promise<Author> {
         bankAccounts: true,
         books: {
           include: {
-            book: true
+            book: true,
           }
         }
       }
@@ -38,7 +39,7 @@ export async function listAuthors(): Promise<Author[]> {
         bankAccounts: true,
         books: {
           include: {
-            book: true
+            book: true,
           }
         }
       }

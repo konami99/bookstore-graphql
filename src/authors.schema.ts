@@ -22,11 +22,11 @@ export class Author {
   @Field()
   pseudonym: string
 
-  @Field(type => [BooksOnAuthors])
-  books: BooksOnAuthors[]
+  @Field(type => [BooksOnAuthors], { nullable: true })
+  books?: BooksOnAuthors[] | null
 
-  @Field(type => [BankAccount])
-  bankAccounts: [BankAccount]
+  @Field(type => [BankAccount], { nullable: true })
+  bankAccounts?: BankAccount[] | null
 
   @Field(type => Date)
   createdAt: Date
@@ -43,8 +43,8 @@ export class BankAccount {
   @Field()
   accountNumber!: string
 
-  @Field(type => Author)
-  author!: Author
+  @Field(type => Author, { nullable: true })
+  author?: Author | null
 
   @Field(type => Date)
   createdAt: Date
@@ -61,8 +61,8 @@ export class Book {
   @Field()
   title!: string
 
-  @Field(type => [BooksOnAuthors])
-  authors!: BooksOnAuthors[]
+  @Field(type => [BooksOnAuthors], { nullable: true })
+  authors?: BooksOnAuthors[] | null
 
   @Field(type => Date)
   createdAt: Date
@@ -73,11 +73,11 @@ export class Book {
 
 @ObjectType()
 export class BooksOnAuthors {
-  @Field(type => Book)
-  book!: Book
+  @Field(type => Book, { nullable: true })
+  book?: Book | null
 
-  @Field(type => Author)
-  author!: Author
+  @Field(type => Author, { nullable: true })
+  author?: Author | null
 
   @Field(type => Date)
   createdAt: Date
@@ -105,20 +105,9 @@ export class AuthorInput {
   @MaxLength(30)
   pseudonym!: string;
 
-  @Field(type => [BookInput])
-  @ValidateNested()
-  books: [BookInput]
-
-  @Field(type => [BankAccountInput])
+  @Field(type => [BankAccountInput], { nullable: true })
   @ValidateNested()
   bankAccounts: [BankAccountInput]
-}
-
-@InputType()
-export class BookInput {
-  @Field()
-  @MaxLength(30)
-  title!: string;
 }
 
 @InputType()
@@ -126,4 +115,11 @@ export class BankAccountInput {
   @Field()
   @MaxLength(30)
   accountNumber!: string;
+}
+
+@InputType()
+export class BookInput {
+  @Field()
+  @MaxLength(30)
+  title!: string;
 }

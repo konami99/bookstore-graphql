@@ -44,8 +44,8 @@ model BooksOnAuthors {
 model BankAccount {
   id        Int      @id @default(autoincrement())
   accountNumber String
-  authorId Int
-  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int?
+  author   Author? @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
