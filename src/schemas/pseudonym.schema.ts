@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { MaxLength, Length, ValidateNested } from "class-validator";
 import { Field, ObjectType, InputType, ID } from "type-graphql"
-import { Author } from "./author";
+import { Author } from "./author.schema";
 
 @ObjectType()
 export class Pseudonym {

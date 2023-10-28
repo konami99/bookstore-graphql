@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
-import { AuthorResolver } from './resolvers/author'
-import { getAuthor } from './queries/author'
+import { AuthorResolver } from './resolvers/author.resolver'
+import { getAuthor } from './queries/author.query'
 import { MyContext } from './context'
 
 async function main() {

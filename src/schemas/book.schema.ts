@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { MaxLength, Length, ValidateNested } from "class-validator";
 import { Field, ObjectType, InputType, ID } from "type-graphql"
-import { BooksOnAuthors } from './bookonauthor'
+import { BooksOnAuthors } from './bookonauthor.schema'
 
 @ObjectType()
 export class Book {

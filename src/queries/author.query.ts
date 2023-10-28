@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { PrismaClient  } from '@prisma/client';
-import { AuthorInput, Author } from '../schemas/author'
+import { AuthorInput, Author } from '../schemas/author.schema'
 
 const prisma = new PrismaClient()
 
