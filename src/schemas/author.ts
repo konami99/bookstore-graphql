@@ -1,6 +1,10 @@
 import "reflect-metadata";
 import { MaxLength, Length, ValidateNested } from "class-validator";
 import { Field, ObjectType, InputType, ID } from "type-graphql"
+import { Pseudonym } from "./pseudonym";
+import { BankAccount } from "./bankaccount";
+import { Book } from "./book";
+import { BooksOnAuthors } from "./bookonauthor";
 
 @ObjectType()
 export class Author {
@@ -19,14 +23,14 @@ export class Author {
   @Field()
   password!: string
 
-  @Field()
-  pseudonym: string
+  @Field(type => Pseudonym, { nullable: true })
+  pseudonym?: Pseudonym | null
 
   @Field(type => [BooksOnAuthors], { nullable: true })
   books?: BooksOnAuthors[] | null
 
   @Field(type => [BankAccount], { nullable: true })
-  bankAccounts?: BankAccount[] | null
+  bankAccounts: BankAccount[] | null
 
   @Field(type => Date)
   createdAt: Date
@@ -35,53 +39,11 @@ export class Author {
   updatedAt: Date
 }
 
-@ObjectType()
-export class BankAccount {
-  @Field(type => ID)
-  id!: number
 
-  @Field()
-  accountNumber!: string
 
-  @Field(type => Author, { nullable: true })
-  author?: Author | null
 
-  @Field(type => Date)
-  createdAt: Date
 
-  @Field(type => Date)
-  updatedAt: Date
-}
 
-@ObjectType()
-export class Book {
-  @Field(type => ID)
-  id!: number
-
-  @Field()
-  title!: string
-
-  @Field(type => [BooksOnAuthors], { nullable: true })
-  authors?: BooksOnAuthors[] | null
-
-  @Field(type => Date)
-  createdAt: Date
-
-  @Field(type => Date)
-  updatedAt: Date
-}
-
-@ObjectType()
-export class BooksOnAuthors {
-  @Field(type => Book, { nullable: true })
-  book?: Book | null
-
-  @Field(type => Author, { nullable: true })
-  author?: Author | null
-
-  @Field(type => Date)
-  createdAt: Date
-}
 
 @InputType()
 export class AuthorInput {
@@ -107,7 +69,11 @@ export class AuthorInput {
 
   @Field(type => [BankAccountInput], { nullable: true })
   @ValidateNested()
-  bankAccounts: [BankAccountInput]
+  bankAccounts: BankAccountInput[]
+
+  @Field(type => [BookInput], { nullable: true })
+  @ValidateNested()
+  books: BookInput[]
 }
 
 @InputType()

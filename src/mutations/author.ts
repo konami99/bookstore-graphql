@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { PrismaClient, Author } from '@prisma/client';
-import { AuthorInput } from '../authors.schema'
+import { AuthorInput } from '../schemas/author'
 
 const prisma = new PrismaClient()
 
@@ -9,7 +9,6 @@ export async function addAuthor(authorToAdd: AuthorInput): Promise<Author> {
     data: {
       name: authorToAdd.name,
       gender: authorToAdd.gender,
-      pseudonym: authorToAdd.pseudonym,
       username: authorToAdd.username,
       password: authorToAdd.password,
     },

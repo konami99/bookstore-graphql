@@ -11,13 +11,14 @@ type Author {
   id: ID!
   name: String!
   password: String!
-  pseudonym: String!
+  pseudonym: Pseudonym
   updatedAt: DateTime!
   username: String!
 }
 
 input AuthorInput {
   bankAccounts: [BankAccountInput!]
+  books: [BookInput!]
   gender: String!
   name: String!
   password: String!
@@ -45,6 +46,10 @@ type Book {
   updatedAt: DateTime!
 }
 
+input BookInput {
+  title: String!
+}
+
 type BooksOnAuthors {
   author: Author
   book: Book
@@ -58,6 +63,13 @@ scalar DateTime
 
 type Mutation {
   addAuthor(data: AuthorInput!): Author!
+}
+
+type Pseudonym {
+  author: Author!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
 }
 
 type Query {

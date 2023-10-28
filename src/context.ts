@@ -1,4 +1,4 @@
-import { Author } from "./authors.schema";
+import { Author } from "./schemas/author";
 
 export interface MyContext {
   authAuthor: Author

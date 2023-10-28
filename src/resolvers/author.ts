@@ -1,10 +1,9 @@
 import "reflect-metadata";
-
 import { Arg, Resolver, Mutation, Query, Ctx } from "type-graphql"
-import { AuthorInput, Author } from "./authors.schema";
-import { addAuthor } from "./mutations/authors.mutations";
-import { getAuthor, listAuthors } from "./queries/authors.queries";
-import { MyContext } from './context'
+import { AuthorInput, Author } from "../schemas/author";
+import { addAuthor } from "../mutations/author";
+import { getAuthor, listAuthors } from "../queries/author";
+import { MyContext } from '../context'
 
 
 @Resolver()

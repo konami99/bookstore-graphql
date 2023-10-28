@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { PrismaClient  } from '@prisma/client';
-import { AuthorInput, Author } from '../authors.schema'
+import { AuthorInput, Author } from '../schemas/author'
 
 const prisma = new PrismaClient()
 
@@ -20,6 +20,7 @@ export async function getAuthor(id: string, username: string): Promise<Author> {
       where: where,
       include: {
         bankAccounts: true,
+        pseudonym: true,
         books: {
           include: {
             book: true,

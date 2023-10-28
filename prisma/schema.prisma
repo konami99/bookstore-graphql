@@ -18,9 +18,17 @@ model Author {
   password     String
   books        BooksOnAuthors[]
   bankAccounts BankAccount[]
-  pseudonym    String
+  pseudonym    Pseudonym?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+}
+
+model Pseudonym {
+  id           Int           @id @default(autoincrement())
+  name         String
+  authorId Int @unique
+  author   Author @relation(fields: [authorId], references: [id])
+  createdAt    DateTime      @default(now())
 }
 
 model Book {
