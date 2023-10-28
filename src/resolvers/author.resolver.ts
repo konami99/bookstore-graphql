@@ -15,7 +15,11 @@ export class AuthorResolver {
   }
 
   @Query(returns => Author)
-  async getAuthor(@Ctx() { authAuthor }: MyContext, @Arg("id") id: string, @Arg("name") username: string): Promise<Author> {
+  async getAuthor(
+    @Ctx() { authAuthor }: MyContext,
+    @Arg("id", { nullable: true }) id: string,
+    @Arg("username", { nullable: true }) username: string): Promise<Author> {
+
     if (authAuthor == null) {
       throw new Error('Authentication failed')
     }

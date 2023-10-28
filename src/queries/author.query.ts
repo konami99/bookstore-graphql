@@ -6,18 +6,11 @@ const prisma = new PrismaClient()
 
 export async function getAuthor(id: string, username: string): Promise<Author> {
   try {
-    const where: { id?: number; username?: string } = {};
-
-    if (id !== "null") {
-      where.id = parseInt(id);
-    }
-
-    if (username !== "null") {
-      where.username = username;
-    }
-
     return prisma.author.findFirst({
-      where: where,
+      where: {
+        id: parseInt(id) || undefined,
+        username: username || undefined,
+      },
       include: {
         bankAccounts: true,
         pseudonym: true,

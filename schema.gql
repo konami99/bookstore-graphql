@@ -73,6 +73,6 @@ type Pseudonym {
 }
 
 type Query {
-  getAuthor(id: String!, name: String!): Author!
+  getAuthor(id: String, username: String): Author!
   listAuthors: [Author!]!
 }
