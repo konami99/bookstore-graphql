@@ -5,51 +5,7 @@ import { Author } from "../schemas/author.schema";
 import { addAuthor } from "../mutations/author.mutation";
 import { getAuthor, listAuthors } from "../queries/author.query";
 import { MyContext } from '../context'
-
-@InputType()
-export class AuthorInput {
-  @Field()
-  @MaxLength(30)
-  name!: string;
-
-  @Field()
-  @MaxLength(10)
-  gender!: string;
-
-  @Field()
-  @MaxLength(30)
-  username!: string;
-
-  @Field()
-  @MaxLength(30)
-  password!: string;
-
-  @Field()
-  @MaxLength(30)
-  pseudonym: string;
-
-  @Field(type => [BankAccountInput], { nullable: true })
-  @ValidateNested()
-  bankAccounts: BankAccountInput[]
-
-  @Field(type => [BookInput], { nullable: true })
-  @ValidateNested()
-  books: BookInput[]
-}
-
-@InputType()
-export class BankAccountInput {
-  @Field()
-  @MaxLength(30)
-  accountNumber!: string;
-}
-
-@InputType()
-export class BookInput {
-  @Field()
-  @MaxLength(30)
-  title!: string;
-}
+import { AuthorInput } from "../inputs/author.input";
 
 @Resolver()
 export class AuthorResolver {
