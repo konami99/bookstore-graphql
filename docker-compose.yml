@@ -18,6 +18,6 @@ services:
     ports:
       - "5433:5432" # Map the container port 5432 to the host port 5432
     environment:
-      POSTGRES_DB: bookstore_dev # Change to your desired database name
+      POSTGRES_DB: bookstore_graphql_dev # Change to your desired database name
       POSTGRES_USER: user # Change to your desired database user
       POSTGRES_PASSWORD: password # Change to your desired database password
